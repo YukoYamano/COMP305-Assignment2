@@ -35,37 +35,36 @@ public class PlayerController : MonoBehaviour
         //return true or false.
         isGround = GroundCheck();
 
-        //Jump code goes here!
-        if (isGround && Input.GetAxis("Jump")>0)
-        {
-            rBody.AddForce(new Vector2(0.0f,jumpForce));
-            isGround = false;
-            //This is one way to play the sound effect.
-            //GetComponent<AudioSource>().Play();
-        }
-        rBody.velocity = new Vector2(horiz*speed, rBody.velocity.y);
+      
+        rBody.velocity = new Vector2(horiz * speed, rBody.velocity.y);
+
+
 
         //check if the sprite needs to be flipped
-        if (isFacingRight && rBody.velocity.x <0 || !isFacingRight && rBody.velocity.x > 0)
+        if (isFacingRight && rBody.velocity.x < 0 || !isFacingRight && rBody.velocity.x > 0)
         {
             Flip();
         }
-      /*  else if(!isFacingRight && rBody.velocity.x > 0)
-        {
-            Flip();
-        }*/
+        /*  else if(!isFacingRight && rBody.velocity.x > 0)
+          {
+              Flip();
+          }*/
 
         //Communicate with the animator
-        anim.SetFloat("xVelocity",Mathf.Abs(rBody.velocity.x));
+        anim.SetFloat("xVelocity", Mathf.Abs(rBody.velocity.x));
 
         anim.SetBool("isGround", isGround);
 
         anim.SetFloat("yVelocity", (rBody.velocity.y));
     }
+    private void Update()
+    {
+        Jump();
+    }
 
     private bool GroundCheck()
     {
-        return Physics2D.OverlapCircle(groundCheckPos.position,groundCheckRadius,whatIsGround);
+        return Physics2D.OverlapCircle(groundCheckPos.position, groundCheckRadius, whatIsGround);
 
     }
 
@@ -77,4 +76,17 @@ public class PlayerController : MonoBehaviour
 
         isFacingRight = !isFacingRight;
     }
+    private void Jump()
+    {
+        ///Jump code goes here!
+        if (isGround && Input.GetButtonDown("Jump"))
+        {
+            Debug.Log("Press Jump button");
+            rBody.AddForce(new Vector2(0.0f, jumpForce));
+            isGround = false;
+            //This is one way to play the sound effect.
+            //GetComponent<AudioSource>().Play();
+        }
+    }
+
 }
