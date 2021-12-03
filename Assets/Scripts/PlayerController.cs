@@ -81,12 +81,29 @@ public class PlayerController : MonoBehaviour
         ///Jump code goes here!
         if (isGround && Input.GetButtonDown("Jump"))
         {
-            Debug.Log("Press Jump button");
+            //Debug.Log("Press Jump button");
             rBody.AddForce(new Vector2(0.0f, jumpForce));
             isGround = false;
             //This is one way to play the sound effect.
             //GetComponent<AudioSource>().Play();
         }
+    }
+
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.gameObject.tag =="Platform")
+        {
+            //Debug.Log("Player is on collide with plartform");
+            gameObject.transform.parent = other.transform;
+        }   
+    }
+
+    private void OnCollisionExit2D(Collision2D other)
+    {
+        if (other.gameObject.tag== "Platform")
+        {
+            gameObject.transform.parent = null;
+        }       
     }
 
 }

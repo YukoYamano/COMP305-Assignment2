@@ -8,7 +8,7 @@ public class MovingPlatformController : MonoBehaviour
     //public Vector2 waypoint2;
     //private Vector2 currentTarget;
 
-    public GameObject waypointObj;
+    //public GameObject waypointObj;
 
     public float moveSpeed = 5.0f;
    // public List<Vector2> waypoints;
@@ -20,13 +20,13 @@ public class MovingPlatformController : MonoBehaviour
     void Awake()
     {
         currentTargetIndex = 0;
-        waypoints  = new List<Transform>();
+      /*  waypoints  = new List<Transform>();
         foreach (Transform t in transform.parent.GetChild(1))
         {
             waypoints.Add(t);
         }
        if(waypoints.Count > 0) 
-        transform.position = waypoints[0].position;
+        transform.position = waypoints[0].position;*/
     }
 
     // Update is called once per frame
@@ -47,6 +47,14 @@ public class MovingPlatformController : MonoBehaviour
 
         }
     }
+
+  
+
+
+
+
+
+    /*
     public void AddNewWaypoint()
     {
         GameObject gobj = Instantiate(waypointObj, Vector2.zero, Quaternion.identity);
@@ -67,5 +75,5 @@ public class MovingPlatformController : MonoBehaviour
             DestroyImmediate(waypoints[i].gameObject);
         }
            waypoints.Clear(); 
-    }
+    }*/
 }
